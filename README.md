@@ -11,18 +11,22 @@ npm run dev
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Run ESLint with auto-fix |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check formatting |
+| Command                | Description               |
+| ---------------------- | ------------------------- |
+| `npm run dev`          | Start dev server          |
+| `npm run build`        | Production build          |
+| `npm run preview`      | Preview production build  |
+| `npm run lint`         | Run ESLint                |
+| `npm run lint:fix`     | Run ESLint with auto-fix  |
+| `npm run format`       | Format code with Prettier |
+| `npm run format:check` | Check formatting          |
 
 ## Tech Stack
 
 - Vue 3 (Composition API, `<script setup>`)
 - Vite
 - ESLint + Prettier
+
+## Development
+
+run `npm run deploy`,
