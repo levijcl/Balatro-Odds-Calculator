@@ -1,24 +1,83 @@
 <script setup>
+import { ref, watch, toValue } from 'vue'
 import { CARDS } from './data/cards.js'
 import { useDeck } from './composables/useDeck.js'
-import { useHandProbabilities } from './composables/useHandProbabilities.js'
+import { useHandSimulation } from './composables/useHandSimulation.js'
+import { calculateHandSimProbabilities } from './utils/handSimProbabilities.js'
 import DeckGrid from './components/DeckGrid.vue'
-import HandProbabilities from './components/HandProbabilities.vue'
+import HandSimulation from './components/HandSimulation.vue'
 
 const { excludedIds, toggleCard, resetDeck, activeCards, activeCount } =
   useDeck()
-const { probabilities } = useHandProbabilities(activeCards)
+
+const {
+  handCardIds,
+  selectedToPlayIds,
+  handCards,
+  fixedCards,
+  drawPool,
+  drawCount,
+  isHandFull,
+  addToHand,
+  removeFromHand,
+  togglePlaySelection,
+  drawRandomHand,
+  clearHand,
+} = useHandSimulation(activeCards)
+
+// Hand simulation probabilities
+const handSimProbabilities = ref({})
+watch(
+  () => [toValue(fixedCards), toValue(drawPool), toValue(drawCount)],
+  ([fixed, pool, count]) => {
+    if (count === 0) {
+      handSimProbabilities.value = {}
+      return
+    }
+    handSimProbabilities.value = calculateHandSimProbabilities(
+      fixed,
+      pool,
+      count
+    )
+  },
+  { immediate: true }
+)
+
+function handleDeckCardClick(cardId) {
+  // Card in hand → remove from hand
+  if (handCardIds.has(cardId)) {
+    removeFromHand(cardId)
+    return
+  }
+  // Hand not full + card is active → add to hand
+  if (!isHandFull.value && !excludedIds.has(cardId)) {
+    addToHand(cardId)
+    return
+  }
+  // Otherwise → normal toggle
+  toggleCard(cardId)
+}
 </script>
 
 <template>
   <div id="center">
     <p>Deck: {{ activeCount }} / 52 cards</p>
     <button class="counter" @click="resetDeck">Reset Deck</button>
-    <HandProbabilities :probabilities="probabilities" />
+    <HandSimulation
+      :hand-cards="handCards"
+      :selected-to-play-ids="selectedToPlayIds"
+      :probabilities="handSimProbabilities"
+      :draw-count="drawCount"
+      @toggle-play="togglePlaySelection"
+      @remove-card="removeFromHand"
+      @draw-random="drawRandomHand"
+      @clear-hand="clearHand"
+    />
     <DeckGrid
       :cards="CARDS"
       :excluded-ids="excludedIds"
-      @toggle-card="toggleCard"
+      :hand-card-ids="handCardIds"
+      @toggle-card="handleDeckCardClick"
     />
   </div>
 </template>

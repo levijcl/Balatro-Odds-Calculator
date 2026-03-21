@@ -40,11 +40,14 @@ Key modules:
 - `src/data/cards.js` — static card definitions (SUITS, RANKS, CARDS array mapping image filenames to suit/rank)
 - `src/data/handTypes.js` — ordered list of 13 Balatro hand types (key + label)
 - `src/composables/useDeck.js` — reactive deck state (excludedIds Set, toggleCard, activeCards computed)
-- `src/composables/useHandProbabilities.js` — reactive wrapper over probability calculation; accepts cardPool + drawCount for reuse in future hand simulation
+- `src/composables/useHandProbabilities.js` — reactive wrapper over deck probability calculation; watches cardPool + drawCount
+- `src/composables/useHandSimulation.js` — reactive hand state (handCardIds, selectedToPlayIds, drawPool, fixedCards); manages add/remove/togglePlay/drawRandom/clearHand
 - `src/utils/combinations.js` — binomial coefficient C(n, k)
-- `src/utils/handProbabilities.js` — exact combinatorial probability calculation (rank-multiplicity DP, suit summation, straight DP, inclusion-exclusion for straight flush/royal flush)
-- `src/components/DeckGrid.vue` + `CardItem.vue` — deck display grid with click-to-toggle exclusion
-- `src/components/HandProbabilities.vue` — displays hand type probabilities list
+- `src/utils/handProbabilities.js` — exact combinatorial probability for deck draws (rank-multiplicity DP, suit summation, straight DP, inclusion-exclusion for SF/RF); also exports helper functions (getRankCounts, getSuitCounts, getSuitRankCounts, RANK_INDEX)
+- `src/utils/handSimProbabilities.js` — exact combinatorial probability for hand simulation (fixed cards + random draws from pool); generalized versions of all 5 computation methods
+- `src/components/DeckGrid.vue` + `CardItem.vue` — deck display grid with click-to-toggle exclusion; CardItem supports `inHand` state
+- `src/components/HandProbabilities.vue` — displays hand type probabilities list (reused for both deck and hand sim)
+- `src/components/HandSimulation.vue` — hand card display with play selection, draw/clear controls, and hand sim probabilities
 - Card images: 52 PNGs in `public/cards/` named `8BitDeck1.png`–`8BitDeck52.png` (1–13 Hearts, 14–26 Clubs, 27–39 Diamonds, 40–52 Spades, each suit ordered 2→A)
 
 ## Code Style

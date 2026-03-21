@@ -6,6 +6,7 @@ import { SUITS } from '../data/cards.js'
 const props = defineProps({
   cards: { type: Array, required: true },
   excludedIds: { type: Set, required: true },
+  handCardIds: { type: Set, default: () => new Set() },
 })
 
 defineEmits(['toggle-card'])
@@ -26,6 +27,7 @@ const cardsBySuit = computed(() =>
         :key="card.id"
         :card="card"
         :excluded="excludedIds.has(card.id)"
+        :in-hand="handCardIds.has(card.id)"
         @toggle="$emit('toggle-card', $event)"
       />
     </div>
