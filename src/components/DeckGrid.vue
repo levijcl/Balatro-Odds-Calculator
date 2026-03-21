@@ -31,3 +31,24 @@ const cardsBySuit = computed(() =>
     </div>
   </div>
 </template>
+
+<style scoped>
+.deck-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.suit-row {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 4px;
+}
+
+@media (max-width: 600px) {
+  .suit-row {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+</style>
