@@ -1,15 +1,20 @@
 <script setup>
 import { CARDS } from './data/cards.js'
 import { useDeck } from './composables/useDeck.js'
+import { useHandProbabilities } from './composables/useHandProbabilities.js'
 import DeckGrid from './components/DeckGrid.vue'
+import HandProbabilities from './components/HandProbabilities.vue'
 
-const { excludedIds, toggleCard, resetDeck, activeCount } = useDeck()
+const { excludedIds, toggleCard, resetDeck, activeCards, activeCount } =
+  useDeck()
+const { probabilities } = useHandProbabilities(activeCards)
 </script>
 
 <template>
   <div id="center">
     <p>Deck: {{ activeCount }} / 52 cards</p>
     <button class="counter" @click="resetDeck">Reset Deck</button>
+    <HandProbabilities :probabilities="probabilities" />
     <DeckGrid
       :cards="CARDS"
       :excluded-ids="excludedIds"
