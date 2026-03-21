@@ -1,5 +1,28 @@
-# Vue 3 + Vite
+# Balatro Odds Calculator
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A web-based calculator for poker hand probabilities in [Balatro](https://www.playbalatro.com/). Customize your deck and see the odds of drawing each hand type.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Run ESLint with auto-fix |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check formatting |
+
+## Tech Stack
+
+- Vue 3 (Composition API, `<script setup>`)
+- Vite
+- ESLint + Prettier
