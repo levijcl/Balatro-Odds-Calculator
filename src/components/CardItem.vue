@@ -4,6 +4,7 @@ const baseUrl = import.meta.env.BASE_URL
 defineProps({
   card: { type: Object, required: true },
   excluded: { type: Boolean, default: false },
+  inHand: { type: Boolean, default: false },
 })
 
 defineEmits(['toggle'])
@@ -12,7 +13,7 @@ defineEmits(['toggle'])
 <template>
   <button
     class="card-item"
-    :class="{ excluded }"
+    :class="{ excluded, 'in-hand': inHand }"
     :aria-pressed="excluded"
     :aria-label="`${card.rank} of ${card.suit}`"
     @click="$emit('toggle', card.id)"
@@ -61,6 +62,15 @@ defineEmits(['toggle'])
 
     &:hover {
       opacity: 0.5;
+    }
+  }
+
+  &.in-hand {
+    border-color: var(--accent);
+    opacity: 0.85;
+
+    &:hover {
+      border-color: var(--accent-border);
     }
   }
 }

@@ -1,13 +1,13 @@
 import { RANKS } from '../data/cards.js'
 import { comb } from './combinations.js'
 
-const RANK_INDEX = Object.fromEntries(RANKS.map((r, i) => [r, i]))
+export const RANK_INDEX = Object.fromEntries(RANKS.map((r, i) => [r, i]))
 
 /**
  * Build rank counts: how many active cards per rank.
  * Returns array of length 13 (index 0 = '2', index 12 = 'A').
  */
-function getRankCounts(cards) {
+export function getRankCounts(cards) {
   const counts = new Array(13).fill(0)
   for (const c of cards) {
     counts[RANK_INDEX[c.rank]]++
@@ -19,7 +19,7 @@ function getRankCounts(cards) {
  * Build suit counts: how many active cards per suit.
  * Returns object { hearts: n, clubs: n, diamonds: n, spades: n }.
  */
-function getSuitCounts(cards) {
+export function getSuitCounts(cards) {
   const counts = {}
   for (const c of cards) {
     counts[c.suit] = (counts[c.suit] || 0) + 1
@@ -31,7 +31,7 @@ function getSuitCounts(cards) {
  * Build suit-rank counts: how many active cards per (suit, rank) pair.
  * Returns Map<string, number> keyed by "suit:rankIndex".
  */
-function getSuitRankCounts(cards) {
+export function getSuitRankCounts(cards) {
   const counts = new Map()
   for (const c of cards) {
     const key = `${c.suit}:${RANK_INDEX[c.rank]}`
