@@ -198,11 +198,15 @@ function emptySlots() {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
+  opacity: 0.5;
   transition: opacity 0.15s;
 
-  .hand-card:hover & {
-    opacity: 1;
+  @media (hover: hover) {
+    opacity: 0;
+
+    .hand-card:hover & {
+      opacity: 1;
+    }
   }
 }
 
