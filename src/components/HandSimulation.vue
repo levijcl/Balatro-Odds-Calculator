@@ -201,8 +201,10 @@ function emptySlots() {
   opacity: 0;
   transition: opacity 0.15s;
 
-  .hand-card:hover & {
-    opacity: 1;
+  @media (hover: hover) {
+    .hand-card:hover & {
+      opacity: 1;
+    }
   }
 }
 
