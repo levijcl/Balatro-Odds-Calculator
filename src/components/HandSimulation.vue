@@ -34,7 +34,7 @@ function emptySlots() {
         </button>
         <button
           v-if="handCards.length > 0"
-          class="hand-btn"
+          class="hand-btn btn-danger"
           @click="$emit('clear-hand')"
         >
           Clear
@@ -84,6 +84,11 @@ function emptySlots() {
   gap: 12px;
   width: 100%;
   max-width: 700px;
+  background: var(--bg-surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .hand-header {
@@ -95,13 +100,13 @@ function emptySlots() {
 }
 
 .hand-title {
-  font-weight: 500;
+  font-weight: 700;
   color: var(--text-h);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .hand-info {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
 }
 
@@ -112,9 +117,9 @@ function emptySlots() {
 
 .hand-btn {
   font-family: var(--sans);
-  font-size: 14px;
-  padding: 4px 12px;
-  border-radius: 5px;
+  font-size: 16px;
+  padding: 4px 14px;
+  border-radius: 6px;
   color: var(--accent);
   background: var(--accent-bg);
   border: 2px solid transparent;
@@ -128,6 +133,19 @@ function emptySlots() {
   &:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+  }
+
+  &.btn-danger {
+    color: var(--red);
+    background: rgba(253, 95, 85, 0.15);
+
+    &:hover {
+      border-color: rgba(253, 95, 85, 0.5);
+    }
+
+    &:focus-visible {
+      outline-color: var(--red);
+    }
   }
 }
 
@@ -171,10 +189,10 @@ function emptySlots() {
   }
 
   &.selected-to-play {
-    border-color: var(--accent);
+    border-color: var(--orange);
     margin-top: 0;
     margin-bottom: 8px;
-    box-shadow: 0 4px 12px rgba(170, 59, 255, 0.25);
+    box-shadow: 0 4px 12px rgba(253, 162, 0, 0.3);
   }
 
   @media (max-width: 600px) {
@@ -189,9 +207,9 @@ function emptySlots() {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--bg);
+  background: var(--bg-surface);
   border: 1px solid var(--border);
-  color: var(--text);
+  color: var(--red);
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
@@ -223,11 +241,5 @@ function emptySlots() {
   color: var(--text);
   font-size: 24px;
   opacity: 0.4;
-}
-
-.hand-hint {
-  font-size: 13px;
-  color: var(--text);
-  opacity: 0.7;
 }
 </style>

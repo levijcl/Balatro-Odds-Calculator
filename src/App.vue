@@ -61,7 +61,10 @@ function handleDeckCardClick(cardId) {
 
 <template>
   <div id="center">
-    <p>Deck: {{ activeCount }} / 52 cards</p>
+    <h1>Balatro Odds Calculator</h1>
+    <p class="deck-info">
+      Deck: <span class="deck-count">{{ activeCount }}</span> / 52 cards
+    </p>
     <button class="counter" @click="resetDeck">Reset Deck</button>
     <HandSimulation
       :hand-cards="handCards"
@@ -97,22 +100,32 @@ function handleDeckCardClick(cardId) {
   }
 }
 
+.deck-info {
+  font-size: 18px;
+  color: var(--text);
+}
+
+.deck-count {
+  color: var(--orange);
+  font-weight: 700;
+}
+
 .counter {
   font-family: var(--sans);
   font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
+  padding: 5px 14px;
+  border-radius: 6px;
+  color: var(--red);
+  background: rgba(253, 95, 85, 0.15);
   border: 2px solid transparent;
   cursor: pointer;
   transition: border-color 0.3s;
 
   &:hover {
-    border-color: var(--accent-border);
+    border-color: rgba(253, 95, 85, 0.5);
   }
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--red);
     outline-offset: 2px;
   }
 }

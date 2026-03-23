@@ -17,7 +17,7 @@ function formatPercent(val) {
   <div class="hand-probabilities">
     <div v-for="hand in HAND_TYPES" :key="hand.key" class="hand-row">
       <span class="hand-label">{{ hand.label }}</span>
-      <span class="hand-prob">{{
+      <span class="hand-prob" :class="{ zero: !probabilities[hand.key] }">{{
         formatPercent(probabilities[hand.key])
       }}</span>
     </div>
@@ -31,30 +31,34 @@ function formatPercent(val) {
   width: 100%;
   max-width: 400px;
   gap: 2px;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  padding: 8px 0;
+  border: 1px solid var(--border);
 }
 
 .hand-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--border);
-
-  &:last-child {
-    border-bottom: none;
-  }
+  padding: 5px 16px;
 }
 
 .hand-label {
-  color: var(--text-h);
-  font-size: 14px;
+  color: var(--orange);
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .hand-prob {
-  font-family: 'Courier New', Courier, monospace;
-  color: var(--accent);
-  font-size: 14px;
+  color: var(--green);
+  font-size: 16px;
+  font-weight: 500;
   min-width: 70px;
   text-align: right;
+
+  &.zero {
+    color: var(--border);
+  }
 }
 </style>
